@@ -8,7 +8,7 @@ import h5py
 import numpy as np
 from PIL import Image
 import os.path as osp
-import cPickle as cp
+import pickle as cp
 
 im_dir = 'bg_img'
 depth_db = h5py.File('depth.h5','r')
@@ -17,7 +17,7 @@ seg_db = h5py.File('seg.h5','r')
 imnames = sorted(depth_db.keys())
 
 with open('imnames.cp', 'rb') as f:
-  filtered_imnames = set(cp.load(f))
+  filtered_imnames = set(cp.load(f,  encoding="bytes" ))
 
 for imname in imnames:
   # ignore if not in filetered list:
